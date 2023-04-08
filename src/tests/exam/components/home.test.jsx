@@ -19,7 +19,7 @@ describe("App Test",() => {
     expect(result).toBeTruthy();
   });
 
-  test("Shoukd show destacados as title", () => {
+  test("Shoul show the provider aaas light", () => {
    const { container } = render(
     <BrowserRouter>
    <ThemeProvider >
