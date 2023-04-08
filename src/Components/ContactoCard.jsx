@@ -3,6 +3,7 @@ import styles from './Contacto.module.css'
 
 const ContactoCard = () => {
   const [submitted, setSubmitted] = useState()
+  const [success, setSuccess] = useState();
   const [error, setError] = useState('')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('');
@@ -10,15 +11,16 @@ const ContactoCard = () => {
   function handleSubmit(e) {
     e.preventDefault()
     console.log(e)
-    console.log(name.match(/^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/))
-    if (!name) {
+    if (!(name.length > 5)) {
       console.error('Please fill out all fields')
+      setSubmitted('')
       setError('Please fill out all fields')
       return
     }
-    if (!email.match(/^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/)) {
-      console.error('Please set a valid color')
-      setError('Please set a valid color')
+    if (!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+      console.error('Please set a valid email')
+      setSubmitted('')
+      setError('Please set a valid email')
       return
     }
     const user = {
@@ -30,6 +32,7 @@ const ContactoCard = () => {
     setName('')
     setEmail('')
     setError('')
+    setSuccess(`Gracias ${name}, te contactaremos cuando antes vía mail`)
   }
 
   useEffect(() => {
@@ -67,14 +70,10 @@ const ContactoCard = () => {
         </div>
         <button className={ styles.button } type='submit'>Send Contact</button>
       </form>
-      {error && <p>{error}</p>}
+      {error && <div className={styles.error}>{error}</div>}
       {submitted && (
-        <div>
-          <h2>Game added!</h2>
-          <p>Name: {submitted.name}</p>
-          <p>imgUrl: {submitted.imgUrl}</p>
-          <p>Score: {submitted.score}</p>
-          <p>Color: {submitted.color}</p>
+        <div className={ styles.success }>
+          {success}
         </div>
       )}
       </section>

@@ -29,3 +29,19 @@
 input {
     min-width: 60vw;
 }
+
+.success {
+    margin-top: 20px;
+    background-color: green;
+    color: white;
+    padding: 30px;
+    border-radius: 5px;
+}
+
+.error {
+    margin-top: 20px;
+    background-color: rgb(148, 0, 0);
+    color: white;
+    padding: 30px;
+    border-radius: 5px;
+}
